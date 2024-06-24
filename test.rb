@@ -19,9 +19,19 @@ print 'Enter a value to get its node: '
 p tree.find(gets.chomp.to_i)
 puts
 
-print 'Printing with iterative level order: '
+print 'Iterative level order: '
 tree.level_order { |node| print "#{node.value} " }
 puts
-print 'Printing with recursive level order: '
+print 'Recursive level order: '
 tree.level_order_rec { |node| print "#{node.value} " }
+puts
+
+print 'Inorder: '
+tree.inorder { |node| print "#{node.value} " }
+puts
+print 'Preorder: '
+tree.preorder { |node| print "#{node.value} " }
+puts
+print 'Postorder: '
+tree.postorder { |node| print "#{node.value} " }
 puts

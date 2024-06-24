@@ -90,6 +90,47 @@ class Tree
     queue unless block_given?
   end
 
+  def inorder(node = root, nodes = [], &block)
+    return if node.nil?
+
+    inorder(node.left, nodes, &block)
+    if block_given?
+      yield(node)
+    else
+      nodes.push(node)
+    end
+    inorder(node.right, nodes, &block)
+
+    nodes unless block_given?
+  end
+
+  def preorder(node = root, nodes = [], &block)
+    return if node.nil?
+
+    if block_given?
+      yield(node)
+    else
+      nodes.push(node)
+    end
+    preorder(node.left, nodes, &block)
+    preorder(node.right, nodes, &block)
+
+    nodes unless block_given?
+  end
+
+  def postorder(node = root, nodes = [], &block)
+    return if node.nil?
+
+    postorder(node.left, nodes, &block)
+    postorder(node.right, nodes, &block)
+
+    if block_given?
+      yield(node)
+    else
+      nodes.push(node)
+    end
+  end
+
   private
 
   def next_largest_value(root_node)
