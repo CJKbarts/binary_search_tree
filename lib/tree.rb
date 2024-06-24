@@ -70,6 +70,17 @@ class Tree
     end
   end
 
+  def level_order
+    nodes = [root]
+    nodes.each do |node|
+      nodes.push(node.left) unless node.left.nil?
+      nodes.push(node.right) unless node.right.nil?
+      yield(node) if block_given?
+    end
+
+    nodes unless block_given?
+  end
+
   private
 
   def next_largest_value(root_node)

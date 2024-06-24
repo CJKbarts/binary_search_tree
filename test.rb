@@ -6,15 +6,18 @@ tree = Tree.new([1, 2, 3, 4, 5, 6, 7, 10])
 tree.pretty_print
 puts
 
-print 'Enter num to insert: '
-tree.insert(gets.chomp.to_i)
-tree.pretty_print
-puts
+# print 'Enter num to insert: '
+# tree.insert(gets.chomp.to_i)
+# tree.pretty_print
+# puts
 
-print 'Enter num to delete: '
-tree.delete(gets.chomp.to_i)
-tree.pretty_print
-puts
+# print 'Enter num to delete: '
+# tree.delete(gets.chomp.to_i)
+# tree.pretty_print
+# puts
 
-print 'Enter a value to get its node: '
-p tree.find(gets.chomp.to_i)
+# print 'Enter a value to get its node: '
+# p tree.find(gets.chomp.to_i)
+
+p(tree.level_order { |node| print "#{node.value} " })
+puts
