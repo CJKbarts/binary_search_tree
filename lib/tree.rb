@@ -34,12 +34,35 @@ class Tree
       else
         insert_main(node, root_node.right)
       end
+    elsif root_node.left.nil?
+      root_node.left = node
     else
-      if root_node.left.nil?
-        root_node.left = node
-      else
-        insert_main(node, root_node.left)
-      end
+      insert_main(node, root_node.left)
     end
+  end
+
+  def delete(value, root_node = root)
+    return root_node if root_node.nil?
+
+    if value > root_node.value
+      root_node.right = delete(value, root_node.right)
+    elsif value < root_node.value
+      root_node.left = delete(value, root_node.left)
+    elsif root_node.right.nil?
+      return root_node.left
+    elsif root_node.left.nil?
+      return root_node.right
+    else
+      root_node.value = next_largest_value(root_node)
+      root_node.right = delete(root_node.value, root_node.right)
+    end
+
+    root_node
+  end
+
+  def next_largest_value(root_node)
+    current_node = root_node.right
+    current_node = root_node.left until current_node.left.nil?
+    current_node.value
   end
 end
