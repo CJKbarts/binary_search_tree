@@ -131,6 +131,23 @@ class Tree
     end
   end
 
+  def height(node = root)
+    return 0 if node.nil?
+
+    1 + [height(node.left), height(node.right)].max
+  end
+
+  def depth(value, root_node = root)
+    return if root_node.nil?
+
+    if value == root_node.value
+      1
+    else
+      next_node = value > root_node.value ? root_node.right : root_node.left
+      1 + depth(value, next_node)
+    end
+  end
+
   private
 
   def next_largest_value(root_node)

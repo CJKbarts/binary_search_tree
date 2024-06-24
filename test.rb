@@ -35,3 +35,8 @@ puts
 print 'Postorder: '
 tree.postorder { |node| print "#{node.value} " }
 puts
+
+puts "Tree height: #{tree.height}"
+
+print 'Enter a num to find its depth: '
+puts tree.depth(gets.chomp.to_i)
