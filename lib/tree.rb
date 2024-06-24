@@ -71,14 +71,23 @@ class Tree
   end
 
   def level_order
-    nodes = [root]
-    nodes.each do |node|
-      nodes.push(node.left) unless node.left.nil?
-      nodes.push(node.right) unless node.right.nil?
+    queue = [root]
+    queue.each do |node|
+      queue.push(node.left) unless node.left.nil?
+      queue.push(node.right) unless node.right.nil?
       yield(node) if block_given?
     end
 
-    nodes unless block_given?
+    queue unless block_given?
+  end
+
+  def level_order_rec(queue = [root], index = 0, &block)
+    node = queue[index]
+    block.call(node) if block_given?
+    queue.push(node.left) unless node.left.nil?
+    queue.push(node.right) unless node.right.nil?
+    level_order_rec(queue, index + 1, &block) if (index + 1) < queue.length
+    queue unless block_given?
   end
 
   private
