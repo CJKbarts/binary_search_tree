@@ -15,3 +15,6 @@ print 'Enter num to delete: '
 tree.delete(gets.chomp.to_i)
 tree.pretty_print
 puts
+
+print 'Enter a value to get its node: '
+p tree.find(gets.chomp.to_i)

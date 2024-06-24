@@ -60,6 +60,18 @@ class Tree
     root_node
   end
 
+  def find(value, root_node = root)
+    if value > root_node.value
+      find(value, root_node.right)
+    elsif value < root_node.value
+      find(value, root_node.left)
+    else
+      root_node
+    end
+  end
+
+  private
+
   def next_largest_value(root_node)
     current_node = root_node.right
     current_node = root_node.left until current_node.left.nil?
