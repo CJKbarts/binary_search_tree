@@ -138,7 +138,7 @@ class Tree
   end
 
   def depth(value, root_node = root)
-    return if root_node.nil?
+    return 0 if root_node.nil?
 
     if value == root_node.value
       1
@@ -146,6 +146,19 @@ class Tree
       next_node = value > root_node.value ? root_node.right : root_node.left
       1 + depth(value, next_node)
     end
+  end
+
+  def balanced?(node = root)
+    return true if node.nil?
+    return true if node.right.nil? && node.left.nil?
+
+    (height(node.right) - height(node.left)).abs <= 1 &&
+      balanced?(node.right) && balanced?(node.left)
+  end
+
+  def rebalance
+    array = inorder.map(&:value)
+    @root = build_tree(array, 0, array.length - 1)
   end
 
   private
