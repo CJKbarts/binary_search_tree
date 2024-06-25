@@ -1,42 +1,34 @@
 require_relative 'lib/node'
 require_relative 'lib/tree'
 
-tree = Tree.new([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
+def print_orders(tree)
+  print 'Level order: '
+  tree.level_order { |node| print "#{node.value} " }
+  puts
+  print 'Inorder: '
+  tree.inorder { |node| print "#{node.value} " }
+  puts
+  print 'Preorder: '
+  tree.preorder { |node| print "#{node.value} " }
+  puts
+  print 'Postorder: '
+  tree.postorder { |node| print "#{node.value} " }
+  puts
+end
+
+tree = Tree.new(Array.new(15) { rand(1..100) })
+tree.pretty_print
+puts
+puts "Tree balanced?: #{tree.balanced?}"
+print_orders(tree)
+
+rand(1..10).times { tree.insert(rand(100..300)) }
 tree.pretty_print
 puts
 
-print 'Enter num to insert: '
-tree.insert(gets.chomp.to_i)
+puts "Tree balanced?: #{tree.balanced?}"
+
+tree.rebalance
 tree.pretty_print
-puts
-
-print 'Enter num to delete: '
-tree.delete(gets.chomp.to_i)
-tree.pretty_print
-puts
-
-print 'Enter a value to get its node: '
-p tree.find(gets.chomp.to_i)
-puts
-
-print 'Iterative level order: '
-tree.level_order { |node| print "#{node.value} " }
-puts
-print 'Recursive level order: '
-tree.level_order_rec { |node| print "#{node.value} " }
-puts
-
-print 'Inorder: '
-tree.inorder { |node| print "#{node.value} " }
-puts
-print 'Preorder: '
-tree.preorder { |node| print "#{node.value} " }
-puts
-print 'Postorder: '
-tree.postorder { |node| print "#{node.value} " }
-puts
-
-puts "Tree height: #{tree.height}"
-
-print 'Enter a num to find its depth: '
-puts tree.depth(gets.chomp.to_i)
+puts "Tree balanced?: #{tree.balanced?}"
+print_orders(tree)
